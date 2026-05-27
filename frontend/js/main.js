@@ -1,74 +1,114 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Mobile Menu Open/Close Logic
+  // =========================
+  // 1. Mobile Menu Logic
+  // =========================
   const hamburger = document.getElementById("hamburger-btn");
   const navLinks = document.getElementById("nav-links");
 
-  hamburger.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-  });
+  if (hamburger && navLinks) {
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  }
 
-  // 2. Contact Form Interception
+  // =========================
+  // 2. Contact Form
+  // =========================
   const contactForm = document.getElementById("contact-form");
+
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
+
       alert(
         "Thank you! Your message has been sent to our laboratory operations office.",
       );
+
       contactForm.reset();
     });
   }
 
-  // 3. Static English Data Source Array
-  const researchProducts = [
-    {
-      id: "bpc-157",
-      name: "BPC-157",
-      purity: "99.9% Purity | Synthesized in Germany",
-      description:
-        "High-grade stable gastric pentadecapeptide sequence verified via HPLC testing for premium analytical research execution.",
-      price: "€49.00",
-    },
-    {
-      id: "tb-500",
-      name: "TB-500",
-      purity: "99.8% Purity | Synthesized in Germany",
-      description:
-        "Lyophilized sterile research compound of Thymosin Beta-4 sequence engineered for cellular research models.",
-      price: "€59.00",
-    },
-    {
-      id: "semaglutide",
-      name: "Semaglutide",
-      purity: "99.9% Purity | Synthesized in Germany",
-      description:
-        "High-specification Glucagon-Like Peptide-1 receptor agonist purified for advanced metabolic structural validation assays.",
-      price: "€89.00",
-    },
-  ];
+  // =========================
+  // 3. Load Products
+  // =========================
+  async function displayProducts() {
+    console.log("Loading product data...");
 
-  // 4. Render Layout Cards
-  function displayProducts() {
     const grid = document.getElementById("product-grid");
-    if (!grid) return;
 
-    grid.innerHTML = "";
+    if (!grid) {
+      console.error("No product grid found.");
+      return;
+    }
 
-    researchProducts.forEach((item) => {
-      const containerBox = document.createElement("article");
-      containerBox.className = "product-card";
+    try {
+      // IMPORTANT:
+      // Adjust path depending on your folder structure
+      const response = await fetch("./fakeDatabase.json");
 
-      containerBox.innerHTML = `
-                <h3 class="product-name">${item.name}</h3>
-                <div class="product-purity">${item.purity}</div>
-                <p class="product-description">${item.description}</p>
-                <div class="product-price">${item.price}</div>
-                <a href="#" class="btn btn-outline" style="width: 100%; height: 40px; font-size: 0.75rem;">
-                    View Lab Report
-                </a>
-            `;
-      grid.appendChild(containerBox);
-    });
+      if (!response.ok) {
+        throw new Error("Failed to fetch JSON file.");
+      }
+
+      const fullProductsList = await response.json();
+      const productsList = fullProductsList.slice(0, 4); // Limit to first 4 items
+      
+
+      console.log(productsList);
+
+      // Clear existing content
+      grid.innerHTML = "";
+
+      // Generate cards
+      productsList.forEach((item) => {
+        const containerBox = document.createElement("article");
+
+        containerBox.className = "product-card";
+
+        containerBox.innerHTML = `
+          <h3 class="product-name">${item.name}</h3>
+
+          <div class="product-purity">
+            ${item.purity}
+          </div>
+
+          <p class="product-description">
+            ${item.description}
+          </p>
+
+          <div class="product-price">
+            ${item.price}
+          </div>
+
+          <a 
+            href="#" 
+            class="btn btn-outline"
+            style="
+              width: 100%;
+              height: 40px;
+              font-size: 0.75rem;
+            "
+          >
+            View Lab Report
+          </a>
+        `;
+
+        grid.appendChild(containerBox);
+      });
+    } catch (error) {
+      console.error("Error loading products:", error);
+
+      grid.innerHTML = `
+        <p style="
+          color: #cbd5e1;
+          text-align: center;
+          grid-column: 1 / -1;
+          padding: 20px;
+        ">
+          Unable to load compound profiles.
+        </p>
+      `;
+    }
   }
 
   displayProducts();

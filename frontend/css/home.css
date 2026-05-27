@@ -41,21 +41,7 @@
   justify-content: center;
   align-items: flex-start;
   gap: 16px;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background-color: rgba(30, 26, 12, 0.6);
-  border: 1px solid var(--border-color);
-  color: var(--accent-primary);
-  padding: 6px 14px;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  order: 2; /* Forces text to display under the image on phones */
 }
 
 .hero-title {
@@ -83,19 +69,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  order: 1; /* Forces the image to the top on phones */
 }
 
 .hero-image-container img {
   position: relative;
   z-index: 10;
   max-height: 280px;
-  width: auto;
+  width: 100%;
+  object-fit: contain; /* Prevents stretching */
+  border-radius: 8px;
 }
 
 @media (min-width: 768px) {
   .hero-content-wrapper {
     grid-template-columns: 1fr 1fr;
     padding: 40px;
+  }
+  .hero-text {
+    order: 1; /* Restores text to the left side on PC */
+  }
+  .hero-image-container {
+    order: 2; /* Restores image to the right side on PC */
   }
   .hero-title {
     font-size: 3.5rem;
