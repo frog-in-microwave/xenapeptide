@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const fullProductsList = await response.json();
       const productsList = fullProductsList.slice(0, 4); // Limit to first 4 items
-      
 
       console.log(productsList);
 
@@ -65,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         containerBox.className = "product-card";
 
+        // Description removed. Link updated to pass the product ID via URL parameters.
         containerBox.innerHTML = `
           <h3 class="product-name">${item.name}</h3>
 
@@ -72,16 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ${item.purity}
           </div>
 
-          <p class="product-description">
-            ${item.description}
-          </p>
-
           <div class="product-price">
             ${item.price}
           </div>
 
           <a 
-            href="#" 
+            href="product.html?id=${item.id}" 
             class="btn btn-outline"
             style="
               width: 100%;
@@ -89,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
               font-size: 0.75rem;
             "
           >
-            View Lab Report
+            View Details
           </a>
         `;
 

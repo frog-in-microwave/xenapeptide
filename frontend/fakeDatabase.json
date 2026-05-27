@@ -1,37 +1,86 @@
 [
   {
-    "id": "prod-1",
-    "name": "BPC-157",
-    "description": "Premium quality, lab-tested for purity.",
-    "price": "€45.00",
+    "id": "1",
+    "name": "BPC-157 10mg",
+    "price": "€35.00",
     "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
   },
   {
-    "id": "prod-2",
-    "name": "TB-500",
-    "description": "Guaranteed quality and excellence.",
+    "id": "2",
+    "name": "MELANOTAN 2 10mg/vial",
+    "price": "€30.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+  },
+  {
+    "id": "3",
+    "name": "GHRP-6 10mg/vial",
+    "price": "€30.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+  },
+  {
+    "id": "4",
+    "name": "HGH FRAGMENT 176-191 5mg/via",
+    "price": "€35.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+  },
+  {
+    "id": "5",
+    "name": "CJC-1295 with DAC 2mg/vial",
+    "price": "€35.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+  },
+  {
+    "id": "6",
+    "name": "TB-500 5mg/vial",
+    "price": "€35.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+  },
+  {
+    "id": "7",
+    "name": "HCG 5000IU 1ml",
+    "price": "€43.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+  },
+  {
+    "id": "8",
+    "name": "RETATRUTIDE — 10mg Vial",
+    "price": "€80.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+  },
+  {
+    "id": "9",
+    "name": "GHK-CU 100 mg",
     "price": "€55.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=TB-500"
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
   },
   {
-    "id": "prod-3",
-    "name": "CJC-1295",
-    "description": "Developed with precision for optimal results.",
-    "price": "€60.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=CJC-1295"
+    "id": "10",
+    "name": "SEMAGLUTIDE 10mg",
+    "price": "€100.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
   },
   {
-    "id": "prod-4",
-    "name": "Ipamorelin",
-    "description": "The highest standard in peptide solutions.",
-    "price": "€50.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=Ipamorelin"
+    "id": "11",
+    "name": "IGF1 LR3 1mg",
+    "price": "€90.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
   },
   {
-    "id": "prod-5",
-    "name": "Melanotan II",
-    "description": "Europe shipping available.",
-    "price": "€40.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=Melanotan+II"
+    "id": "12",
+    "name": "SLUPP-332 5mg",
+    "price": "€70.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+  },
+  {
+    "id": "13",
+    "name": "MOTS-C 10mg",
+    "price": "€48.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+  },
+  {
+    "id": "14",
+    "name": "PT141 10mg",
+    "price": "€35.00",
+    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
   }
 ]
