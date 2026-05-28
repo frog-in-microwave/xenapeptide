@@ -1,4 +1,4 @@
-async function displayProducts() {
+async function fetchProducts(all = false) {
   const grid = document.getElementById("product-grid");
 
   if (!grid) return;
@@ -11,8 +11,7 @@ async function displayProducts() {
     }
 
     const fullProductsList = await response.json();
-
-    const productsList = fullProductsList.slice(0, 4);
+    const productsList = all ? fullProductsList : fullProductsList.slice(0, 4);
 
     grid.innerHTML = "";
 
@@ -72,4 +71,4 @@ async function displayProducts() {
   }
 }
 
-export default displayProducts;
+export default fetchProducts;

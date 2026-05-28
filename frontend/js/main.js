@@ -1,4 +1,4 @@
-import displayProducts from "./displayProducts.js";
+import fetchProducts from "./fetchProducts.js";
 
 
 
@@ -41,5 +41,5 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
   
 
-  displayProducts();
+  fetchProducts();
 });
