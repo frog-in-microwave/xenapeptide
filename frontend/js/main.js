@@ -1,13 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
   // =========================
-  // 1. Mobile Menu Logic
+  // 1. Mobile Drawer Menu
   // =========================
   const hamburger = document.getElementById("hamburger-btn");
   const navLinks = document.getElementById("nav-links");
+  const overlay = document.getElementById("nav-overlay");
 
-  if (hamburger && navLinks) {
+  function openDrawer() {
+    navLinks.classList.add("active");
+    overlay.classList.add("active");
+    hamburger.textContent = "✕";
+  }
+
+  function closeDrawer() {
+    navLinks.classList.remove("active");
+    overlay.classList.remove("active");
+    hamburger.textContent = "☰";
+  }
+
+  if (hamburger && navLinks && overlay) {
     hamburger.addEventListener("click", () => {
-      navLinks.classList.toggle("active");
+      navLinks.classList.contains("active") ? closeDrawer() : openDrawer();
+    });
+
+    overlay.addEventListener("click", closeDrawer);
+
+    // Close drawer when a nav link is tapped
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeDrawer);
     });
   }
 
@@ -15,15 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // 2. Contact Form
   // =========================
   const contactForm = document.getElementById("contact-form");
-
   if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
-
       alert(
         "Thank you! Your message has been sent to our laboratory operations office.",
       );
-
       contactForm.reset();
     });
   }
@@ -32,75 +49,39 @@ document.addEventListener("DOMContentLoaded", () => {
   // 3. Load Products
   // =========================
   async function displayProducts() {
-    console.log("Loading product data...");
-
     const grid = document.getElementById("product-grid");
-
-    if (!grid) {
-      console.error("No product grid found.");
-      return;
-    }
+    if (!grid) return;
 
     try {
-      // IMPORTANT:
-      // Adjust path depending on your folder structure
       const response = await fetch("./fakeDatabase.json");
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch JSON file.");
-      }
+      if (!response.ok) throw new Error("Failed to fetch product data.");
 
       const fullProductsList = await response.json();
-      const productsList = fullProductsList.slice(0, 4); // Limit to first 4 items
+      const productsList = fullProductsList.slice(0, 4);
 
-      console.log(productsList);
-
-      // Clear existing content
       grid.innerHTML = "";
 
-      // Generate cards
       productsList.forEach((item) => {
-        const containerBox = document.createElement("article");
-
-        containerBox.className = "product-card";
-
-        // Description removed. Link updated to pass the product ID via URL parameters.
-        containerBox.innerHTML = `
+        const card = document.createElement("article");
+        card.className = "product-card";
+        card.innerHTML = `
           <h3 class="product-name">${item.name}</h3>
-
-          <div class="product-purity">
-            ${item.purity}
-          </div>
-
-          <div class="product-price">
-            ${item.price}
-          </div>
-
-          <a 
-            href="product.html?id=${item.id}" 
+          <div class="product-purity">${item.purity ?? ""}</div>
+          <div class="product-price">${item.price}</div>
+          <a
+            href="product-detail.html?id=${item.id}"
             class="btn btn-outline"
-            style="
-              width: 100%;
-              height: 40px;
-              font-size: 0.75rem;
-            "
+            style="width: 100%; height: 40px; font-size: 0.75rem;"
           >
             View Details
           </a>
         `;
-
-        grid.appendChild(containerBox);
+        grid.appendChild(card);
       });
     } catch (error) {
       console.error("Error loading products:", error);
-
       grid.innerHTML = `
-        <p style="
-          color: #cbd5e1;
-          text-align: center;
-          grid-column: 1 / -1;
-          padding: 20px;
-        ">
+        <p style="color: #cbd5e1; text-align: center; grid-column: 1 / -1; padding: 20px;">
           Unable to load compound profiles.
         </p>
       `;
