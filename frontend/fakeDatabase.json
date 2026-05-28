@@ -3,7 +3,7 @@
     "id": "1",
     "name": "BPC-157 10mg",
     "price": "€35.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+    "image": "static-images/hero-section-image.jpeg"
   },
   {
     "id": "2",
@@ -19,7 +19,7 @@
   },
   {
     "id": "4",
-    "name": "HGH FRAGMENT 176-191 5mg/via",
+    "name": "HGH FRAGMENT 176-191 5mg/vial",
     "price": "€35.00",
     "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
   },
