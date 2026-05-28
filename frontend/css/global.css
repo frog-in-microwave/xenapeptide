@@ -30,6 +30,54 @@
 }
 
 /* =========================================
+   Layout Container (GLOBAL)
+   ========================================= */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* =========================================
+   Buttons Layout Helpers (GLOBAL)
+   ========================================= */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Shared section button group (can be reused anywhere) */
+.showcase-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.showcase-buttons .btn {
+  width: 100%;
+  max-width: 280px;
+}
+
+@media (min-width: 600px) {
+  .showcase-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+
+
+
+
+
+
+/* =========================================
    Base
    ========================================= */
 html {
@@ -392,7 +440,8 @@ img {
 
 @media (min-width: 992px) {
   .product-grid {
-    grid-template-columns: repeat(3, 1fr);
+    /* Changed from 3 to 4 columns to keep cards narrow and phone-shaped */
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -403,7 +452,8 @@ img {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  /* Reduced padding slightly to maintain a tight, compact feel */
+  padding: 20px; 
   transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
 }
 
@@ -413,7 +463,7 @@ img {
 }
 
 .product-name {
-  font-size: 1.35rem;
+  font-size: 1.25rem; /* Scaled down slightly to fit narrower cards */
   font-weight: 700;
   margin-bottom: 4px;
   color: var(--text-primary);
@@ -435,12 +485,11 @@ img {
 }
 
 .product-price {
-  font-size: 1.25rem;
+  font-size: 1.15rem; /* Adjusted for proportionality */
   font-weight: 700;
   margin-bottom: 16px;
   color: var(--text-primary);
 }
-
 
 
 /* =========================================
