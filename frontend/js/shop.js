@@ -1,110 +1,91 @@
-// js/shop.js
-import fetchProducts from "./fetchProducts.js";
+import { getProducts, renderProducts } from "./fetchProducts.js";
+import "./modal.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // =========================================
-  // 1. Navigation Panel Controls
+  // 1. Mobile Drawer
   // =========================================
   const hamburger = document.getElementById("hamburger-btn");
   const navLinks = document.getElementById("nav-links");
   const overlay = document.getElementById("nav-overlay");
 
-  function toggleDrawer() {
-    const isActive = navLinks.classList.contains("active");
-    navLinks.classList.toggle("active");
-    overlay.classList.toggle("active");
-    hamburger.setAttribute("aria-expanded", !isActive);
+  const ICON_OPEN = `
+    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <line x1="3" y1="6"  x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>`;
 
-    // Toggle between Hamburger and Close icon shapes
-    if (!isActive) {
-      hamburger.innerHTML = `
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      `;
-    } else {
-      hamburger.innerHTML = `
-        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      `;
-    }
+  const ICON_CLOSE = `
+    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6"  y1="6" x2="18" y2="18"></line>
+    </svg>`;
+
+  function openDrawer() {
+    navLinks.classList.add("active");
+    overlay.classList.add("active");
+    hamburger.innerHTML = ICON_CLOSE;
+    hamburger.setAttribute("aria-expanded", "true");
+  }
+
+  function closeDrawer() {
+    navLinks.classList.remove("active");
+    overlay.classList.remove("active");
+    hamburger.innerHTML = ICON_OPEN;
+    hamburger.setAttribute("aria-expanded", "false");
   }
 
   if (hamburger && navLinks && overlay) {
-    hamburger.addEventListener("click", toggleDrawer);
-    overlay.addEventListener("click", toggleDrawer);
-    navLinks.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        if (navLinks.classList.contains("active")) toggleDrawer();
-      });
-    });
+    hamburger.innerHTML = ICON_OPEN;
+    hamburger.addEventListener("click", () =>
+      navLinks.classList.contains("active") ? closeDrawer() : openDrawer(),
+    );
+    overlay.addEventListener("click", closeDrawer);
+    navLinks
+      .querySelectorAll("a")
+      .forEach((link) => link.addEventListener("click", closeDrawer));
   }
 
   // =========================================
-  // 2. Data Initialization & Caching
+  // 2. Load All Products (single fetch)
   // =========================================
-  let masterProductList = [];
   const grid = document.getElementById("product-grid");
   const searchInput = document.getElementById("search-input");
+  let allProducts = [];
 
-  try {
-    // Cache the database internally for immediate parsing during search
-    const response = await fetch("./fakeDatabase.json");
-    if (response.ok) {
-      masterProductList = await response.json();
+  if (grid) {
+    try {
+      allProducts = await getProducts();
+      renderProducts(allProducts, grid);
+    } catch (error) {
+      console.error("Error loading products:", error);
+      grid.innerHTML = `
+        <p style="color:#cbd5e1; text-align:center; grid-column:1/-1; padding:20px;">
+          Unable to load compound profiles.
+        </p>`;
     }
-
-    // Utilize your provided rendering module for the initial build
-    await fetchProducts(true);
-  } catch (error) {
-    console.error("Database resolution error:", error);
   }
 
   // =========================================
-  // 3. Search & Filter Pipeline
+  // 3. Search & Filter (no extra fetch)
   // =========================================
-  if (searchInput) {
+  if (searchInput && grid) {
     searchInput.addEventListener("input", (e) => {
-      // Clean and parse the input data
       const query = e.target.value.trim().toLowerCase();
-
-      const filtered = masterProductList.filter((item) =>
+      const filtered = allProducts.filter((item) =>
         item.name.toLowerCase().includes(query),
       );
 
-      // Wipe current grid
-      grid.innerHTML = "";
-
-      // Handle empty states gracefully
       if (filtered.length === 0) {
         grid.innerHTML = `
           <div class="empty-state">
-            No analytical records match "${e.target.value}". 
-          </div>
-        `;
+            No compounds match "${e.target.value}".
+          </div>`;
         return;
       }
 
-      // Re-render strictly parsed HTML content for filtered items
-      filtered.forEach((item) => {
-        const card = document.createElement("article");
-        card.className = "product-card";
-        card.innerHTML = `
-          <div class="product-image-wrapper">
-            <img src="${item.image}" alt="${item.name} Research Peptide" class="product-image" loading="lazy">
-          </div>
-          <h3 class="product-name">${item.name}</h3>
-          <div class="product-price">${item.price}</div>
-          <a href="product-detail.html?id=${item.id}" class="btn btn-outline" style="width: 100%; height: 40px; font-size: 0.75rem;">
-            View Details
-          </a>
-        `;
-        grid.appendChild(card);
-      });
+      renderProducts(filtered, grid);
     });
   }
 });
