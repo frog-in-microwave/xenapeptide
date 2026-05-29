@@ -16,6 +16,10 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--bg-color);
@@ -137,7 +141,7 @@ img { max-width: 100%; height: auto; display: block; }
   display: flex;
   position: fixed;
   top: 0;
-  right: -100%;
+  right: 0;
   width: 260px;
   height: 100vh;
   background-color: #0d0d0d;
@@ -146,10 +150,12 @@ img { max-width: 100%; height: auto; display: block; }
   align-items: center;
   gap: 8px;
   border-left: 1px solid var(--border-color);
-  transition: right var(--transition-speed) ease;
+  /* transform instead of right: -100% so it never causes a scrollbar */
+  transform: translateX(100%);
+  transition: transform var(--transition-speed) ease;
   z-index: 1001;
 }
-.nav-links.active { right: 0; }
+.nav-links.active { transform: translateX(0); }
 .nav-links li { width: 100%; text-align: center; }
 .nav-links a {
   display: block;
