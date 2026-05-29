@@ -109,18 +109,17 @@ document.addEventListener("DOMContentLoaded", async () => {
           <h1 class="detail-name">${product.name}</h1>
           <p class="detail-price">${product.price}</p>
 
+          <button class="btn btn-primary detail-purchase-btn">
+            Purchase
+          </button>
+
           <div class="detail-divider"></div>
 
           <div class="detail-description">${product.description.replace(/\n/g, "<br>")}</div>
 
-          <div class="detail-actions">
-            <button class="btn btn-primary detail-purchase-btn">
-              Purchase
-            </button>
-            <a href="contact.html" class="btn btn-outline">
-              Ask a Question
-            </a>
-          </div>
+          <a href="contact.html" class="btn btn-outline detail-contact-btn">
+            Ask Us a Question
+          </a>
 
         </div>
 

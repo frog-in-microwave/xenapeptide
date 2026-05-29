@@ -84,20 +84,13 @@
 /* =========================================
    Action Buttons
    ========================================= */
-.detail-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 8px;
+.detail-purchase-btn {
+  width: 100%;
 }
 
-@media (min-width: 480px) {
-  .detail-actions {
-    flex-direction: row;
-  }
-  .detail-actions .btn {
-    flex: 1;
-  }
+.detail-contact-btn {
+  width: 100%;
+  margin-top: 16px;
 }
 
 /* =========================================
