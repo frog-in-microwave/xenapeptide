@@ -44,7 +44,83 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================================
-  // 2. Contact Form
+  // 2. Validation Rules
+  // =========================================
+  const VALIDATORS = {
+    name: {
+      el: () => document.getElementById("contact-name"),
+      err: () => document.getElementById("error-name"),
+      validate(val) {
+        if (!val) return "Please enter your full name.";
+        if (val.length < 2) return "Name must be at least 2 characters.";
+        return null;
+      },
+    },
+    email: {
+      el: () => document.getElementById("contact-email"),
+      err: () => document.getElementById("error-email"),
+      validate(val) {
+        if (!val) return "Please enter your email address.";
+        // Standard email regex
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))
+          return "Please enter a valid email address (e.g. john@example.com).";
+        return null;
+      },
+    },
+    phone: {
+      el: () => document.getElementById("contact-phone"),
+      err: () => document.getElementById("error-phone"),
+      validate(val) {
+        if (!val) return null; // optional field
+        // Allow: digits, spaces, +, -, (, ) only
+        if (!/^[0-9+\-\s()]{6,20}$/.test(val))
+          return "Phone number can only contain digits, spaces, +, -, ( and ).";
+        return null;
+      },
+    },
+    message: {
+      el: () => document.getElementById("contact-message"),
+      err: () => document.getElementById("error-message"),
+      validate(val) {
+        if (!val) return "Please enter a message before submitting.";
+        if (val.length < 10)
+          return "Message is too short. Please provide more detail.";
+        return null;
+      },
+    },
+  };
+
+  function validateField(key) {
+    const { el, err, validate } = VALIDATORS[key];
+    const input = el();
+    const errEl = err();
+    const val = input.value.trim();
+    const error = validate(val);
+
+    if (error) {
+      input.classList.add("invalid");
+      errEl.textContent = error;
+      return false;
+    } else {
+      input.classList.remove("invalid");
+      errEl.textContent = "";
+      return true;
+    }
+  }
+
+  // Validate each field on blur so errors appear as the user moves on
+  Object.keys(VALIDATORS).forEach((key) => {
+    VALIDATORS[key].el().addEventListener("blur", () => validateField(key));
+    // Clear error as soon as the user starts correcting the field
+    VALIDATORS[key].el().addEventListener("input", () => {
+      if (VALIDATORS[key].el().classList.contains("invalid")) {
+        validateField(key);
+      }
+    });
+  });
+
+  // =========================================
+  // 3. Form Submit
   // =========================================
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
@@ -52,6 +128,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      // Run all validators and stop if any fail
+      const allValid = Object.keys(VALIDATORS)
+        .map((key) => validateField(key))
+        .every(Boolean);
+
+      if (!allValid) return;
 
       const submitBtn = form.querySelector(".contact-submit-btn");
       submitBtn.disabled = true;
@@ -81,6 +164,11 @@ document.addEventListener("DOMContentLoaded", () => {
         status.textContent = "Message sent! We will get back to you shortly.";
         status.className = "form-status success";
         form.reset();
+        // Clear any leftover invalid states after reset
+        Object.keys(VALIDATORS).forEach((key) => {
+          VALIDATORS[key].el().classList.remove("invalid");
+          VALIDATORS[key].err().textContent = "";
+        });
       } catch (error) {
         status.textContent =
           "Something went wrong. Please try again or contact us directly.";
