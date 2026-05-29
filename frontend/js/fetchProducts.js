@@ -11,6 +11,7 @@ export function renderProducts(products, grid) {
   products.forEach((item) => {
     const card = document.createElement("article");
     card.className = "product-card";
+    card.style.cursor = "pointer";
     card.innerHTML = `
       <div class="product-image-wrapper">
         <img
@@ -30,7 +31,18 @@ export function renderProducts(products, grid) {
         Purchase
       </button>
     `;
-    card.querySelector(".purchase-btn").addEventListener("click", openModal);
+
+    // Purchase button opens modal — does NOT navigate
+    card.querySelector(".purchase-btn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      openModal();
+    });
+
+    // Clicking anywhere else on the card navigates to product detail
+    card.addEventListener("click", () => {
+      window.location.href = `product-detail.html?id=${item.id}`;
+    });
+
     grid.appendChild(card);
   });
 }

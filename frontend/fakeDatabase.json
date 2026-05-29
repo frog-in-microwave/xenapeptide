@@ -3,84 +3,98 @@
     "id": "1",
     "name": "BPC-157 10mg",
     "price": "€35.00",
-    "image": "static-images/hero-section-image.jpeg"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=BPC-157",
+    "description": "BPC-157 (Body Protection Compound-157) is a synthetic peptide derived from a protective protein found in the stomach. It consists of 15 amino acids and has been extensively studied for its regenerative and cytoprotective properties. Research suggests it promotes accelerated healing of tendons, ligaments, muscles, and the gastrointestinal tract. It is believed to act through the nitric oxide system and by upregulating growth hormone receptors. Supplied as a lyophilized powder at 10mg per vial, synthesized under strict GMP-compliant conditions in Germany."
   },
   {
     "id": "2",
     "name": "MELANOTAN 2 10mg/vial",
     "price": "€30.00",
-    "image": "static-images/hero-section-image.jpeg"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=MT2",
+    "description": "Melanotan II is a synthetic analogue of the naturally occurring peptide hormone alpha-melanocyte-stimulating hormone (α-MSH). It binds to melanocortin receptors and has been studied for its effects on pigmentation and related pathways. Each vial contains 10mg of lyophilized peptide, manufactured in Germany under certified laboratory conditions to ensure maximum purity and consistency."
   },
   {
     "id": "3",
     "name": "GHRP-6 10mg/vial",
     "price": "€30.00",
-    "image": "static-images/hero-section-image.jpeg"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=GHRP-6",
+    "description": "GHRP-6 (Growth Hormone Releasing Peptide-6) is a hexapeptide that stimulates the pituitary gland to secrete growth hormone through the ghrelin receptor pathway. Research indicates significant growth hormone release activity, making it a widely studied compound in metabolic and recovery research. Supplied as 10mg lyophilized powder per vial, produced in Germany to pharmaceutical-grade purity standards."
   },
   {
     "id": "4",
     "name": "HGH FRAGMENT 176-191 5mg/vial",
     "price": "€35.00",
-    "image": "static-images/hero-section-image.jpeg"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=HGH+FRAG",
+    "description": "HGH Fragment 176-191 is a stabilized analogue of the C-terminal region of human growth hormone, specifically amino acids 176 through 191. Studies suggest it regulates fat metabolism without the side effects associated with unmodified HGH. It has been shown to stimulate lipolysis and inhibit lipogenesis in research settings. Each vial contains 5mg of lyophilized peptide, synthesized in Germany under stringent quality control protocols."
   },
   {
     "id": "5",
     "name": "CJC-1295 with DAC 2mg/vial",
     "price": "€35.00",
-    "image": "static-images/hero-section-image.jpeg"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=CJC-1295",
+    "description": "CJC-1295 with Drug Affinity Complex (DAC) is a long-acting synthetic analogue of growth hormone releasing hormone (GHRH). The DAC technology extends its half-life significantly by allowing it to bind to serum albumin, resulting in sustained growth hormone release. Research demonstrates consistent elevation of GH and IGF-1 levels over extended periods. Supplied as 2mg lyophilized powder per vial, manufactured in certified German laboratories."
   },
   {
     "id": "6",
     "name": "TB-500 5mg/vial",
     "price": "€35.00",
-    "image": "static-images/hero-section-image.jpeg"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=TB-500",
+    "description": "TB-500 is a synthetic version of Thymosin Beta-4, a naturally occurring 43 amino acid peptide present in virtually all human and animal cells. It plays a key role in building new blood vessels, muscle tissue, and cell migration. Research highlights its potential in promoting wound healing, reducing inflammation, and improving flexibility. Each vial contains 5mg of lyophilized peptide, produced under strict GMP conditions in Germany."
   },
   {
     "id": "7",
     "name": "HCG 5000IU 1ml",
     "price": "€43.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=HCG",
+    "description": "Human Chorionic Gonadotropin (HCG) is a glycoprotein hormone that mimics the action of Luteinizing Hormone (LH). It is extensively studied in the context of hormonal regulation and gonadal function. Each unit contains 5000 IU in 1ml, formulated and quality-tested in Germany to ensure biological activity and purity consistent with research-grade specifications."
   },
   {
     "id": "8",
-    "name": "RETATRUTIDE — 10mg Vial",
+    "name": "RETATRUTIDE 10mg Vial",
     "price": "€80.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=RETATRUTIDE",
+    "description": "Retatrutide is a triple agonist peptide targeting GIP, GLP-1, and glucagon receptors simultaneously. It represents a next-generation approach in metabolic research, with studies suggesting superior outcomes in glucose regulation and body composition compared to dual agonists. Supplied as 10mg lyophilized powder per vial, synthesized to the highest purity standards in our German research facility."
   },
   {
     "id": "9",
-    "name": "GHK-CU 100 mg",
+    "name": "GHK-CU 100mg",
     "price": "€55.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=GHK-CU",
+    "description": "GHK-Cu (Copper Peptide GHK-Cu) is a naturally occurring copper complex of the tripeptide glycyl-L-histidyl-L-lysine. Research has shown it possesses potent wound healing, anti-inflammatory, and antioxidant properties. It is known to stimulate collagen synthesis and activate the body's own antioxidant systems. Supplied as 100mg of lyophilized powder, manufactured under certified conditions in Germany."
   },
   {
     "id": "10",
     "name": "SEMAGLUTIDE 10mg",
     "price": "€100.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=SEMAGLUTIDE",
+    "description": "Semaglutide is a glucagon-like peptide-1 (GLP-1) receptor agonist with a molecular structure closely resembling natural GLP-1. It has been widely studied for its effects on glucose metabolism, appetite regulation, and cardiovascular markers. Each vial contains 10mg of high-purity lyophilized semaglutide, synthesized in Germany under pharmaceutical-grade manufacturing protocols with rigorous purity verification."
   },
   {
     "id": "11",
     "name": "IGF1 LR3 1mg",
     "price": "€90.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=IGF1+LR3",
+    "description": "IGF-1 LR3 (Insulin-Like Growth Factor-1 Long Arg3) is a synthetic, modified form of IGF-1 with an arginine substitution at position 3 and a 13 amino acid extension at the N-terminus. These modifications significantly extend its half-life compared to native IGF-1 by reducing its binding to IGF-binding proteins. Research indicates broad anabolic and cytoprotective effects at the cellular level. Supplied as 1mg lyophilized powder, produced in Germany."
   },
   {
     "id": "12",
     "name": "SLUPP-332 5mg",
     "price": "€70.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=SLUPP-332",
+    "description": "SLUPP-332 is a synthetic small molecule agonist of the Rev-Erb nuclear receptors, which play a central role in circadian rhythm regulation and metabolic homeostasis. Research suggests it may influence mitochondrial biogenesis, fatty acid oxidation, and exercise endurance capacity. Supplied as 5mg lyophilized powder per vial, synthesized under strict analytical chemistry standards in our German laboratory."
   },
   {
     "id": "13",
     "name": "MOTS-C 10mg",
     "price": "€48.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=MOTS-C",
+    "description": "MOTS-c is a mitochondria-derived peptide encoded by the mitochondrial genome. It has been identified as a novel regulator of cellular metabolism, with research demonstrating its role in activating AMPK pathways and improving insulin sensitivity. Studies also suggest anti-aging and exercise-mimetic properties. Each vial contains 10mg of lyophilized MOTS-c peptide, manufactured in Germany to research-grade purity specifications."
   },
   {
     "id": "14",
     "name": "PT141 10mg",
     "price": "€35.00",
-    "image": "https://placehold.co/400x400/1e3b70/d4af37?text=BPC-157"
+    "image": "https://placehold.co/600x600/1e3b70/d4af37?text=PT141",
+    "description": "PT-141 (Bremelanotide) is a synthetic peptide analogue of Melanotan II, acting as a melanocortin receptor agonist. Unlike Melanotan II, it does not significantly affect pigmentation at standard research doses and has been studied primarily for its effects through the central nervous system via MC3R and MC4R receptor pathways. Supplied as 10mg lyophilized powder per vial, produced in Germany under certified GMP-compliant conditions."
   }
 ]
