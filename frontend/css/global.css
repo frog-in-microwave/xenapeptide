@@ -134,6 +134,50 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .hamburger:hover { border-color: var(--accent-primary); }
 
+
+/* =========================================
+   NAV ICONS + ACTIVE PAGE
+   ADD THIS BELOW .nav-links a
+   ========================================= */
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  line-height: 1;
+}
+
+.nav-links a svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+
+  position: relative;
+  top: 1px;
+}
+
+/* Active page */
+.nav-links a.active,
+.nav-links a[aria-current="page"] {
+  color: var(--accent-primary);
+}
+
+/* Optional subtle hover glow */
+.nav-links a.active svg,
+.nav-links a[aria-current="page"] svg {
+  color: var(--accent-primary);
+}
+
+/* Desktop alignment improvement */
+@media (min-width: 768px) {
+  .nav-links a {
+    justify-content: flex-start;
+  }
+}
+
+
+
 /* =========================================
    Drawer Nav (mobile)
    ========================================= */
