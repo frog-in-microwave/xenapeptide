@@ -361,8 +361,9 @@ img { max-width: 100%; height: auto; display: block; }
   background: rgba(0, 0, 0, 0.75);
   z-index: 2000;
   backdrop-filter: blur(4px);
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
+  padding: 20px;
   overflow: hidden;
 }
 .modal-overlay.active { display: flex; }
@@ -373,7 +374,7 @@ img { max-width: 100%; height: auto; display: block; }
   /* calc(100vw - 24px) is viewport-based — cannot overflow regardless of content */
   width: calc(100vw - 24px);
   max-width: 420px;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 1rem;
   padding: 20px 18px 32px;
   position: relative;
   display: flex;
@@ -381,16 +382,6 @@ img { max-width: 100%; height: auto; display: block; }
   gap: 10px;
   overflow: hidden;
   animation: slideUp 0.3s ease;
-}
-
-.modal::before {
-  content: "";
-  display: block;
-  width: 36px;
-  height: 4px;
-  background-color: var(--border-light);
-  border-radius: 99px;
-  margin: 0 auto 8px;
 }
 
 @keyframes slideUp {
@@ -474,19 +465,12 @@ img { max-width: 100%; height: auto; display: block; }
   white-space: nowrap;
 }
 
-/* Desktop: centered card */
 @media (min-width: 540px) {
-  .modal-overlay {
-    align-items: center;
-    padding: 20px;
-  }
   .modal {
-    border-radius: 1rem;
     padding: 36px 28px;
     gap: 12px;
     animation: fadeScaleIn 0.25s ease;
   }
-  .modal::before { display: none; }
   .modal-title { font-size: 1.35rem; }
   .modal-contact-item { font-size: 0.9rem; padding: 14px 16px; }
 }
