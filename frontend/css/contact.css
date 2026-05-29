@@ -1,0 +1,199 @@
+/* =========================================
+   Contact Page Layout
+   ========================================= */
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  padding: 20px 0 80px;
+}
+
+@media (min-width: 768px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    align-items: start;
+    padding: 40px 0 100px;
+  }
+}
+
+/* =========================================
+   Left Info Panel
+   ========================================= */
+.contact-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-primary);
+  margin-bottom: 10px;
+}
+
+.contact-title {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.contact-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+/* =========================================
+   Contact Channels
+   ========================================= */
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-channel-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  transition: border-color var(--transition-speed) ease;
+}
+
+.contact-channel-item:hover {
+  border-color: var(--accent-primary);
+}
+
+.contact-channel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(212, 175, 55, 0.08);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.contact-channel-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.channel-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.channel-value {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* =========================================
+   Right Form Panel
+   ========================================= */
+.contact-form-panel {
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  padding: 32px 24px;
+}
+
+@media (min-width: 480px) {
+  .contact-form-panel {
+    padding: 40px 36px;
+  }
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Two fields side by side on wider screens */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
+}
+
+/* =========================================
+   Submit Button & Status
+   ========================================= */
+.contact-submit-btn {
+  width: 100%;
+}
+
+.form-status {
+  font-size: 0.875rem;
+  text-align: center;
+  min-height: 20px;
+}
+
+.form-status.success { color: #4ade80; }
+.form-status.error   { color: #f87171; }
