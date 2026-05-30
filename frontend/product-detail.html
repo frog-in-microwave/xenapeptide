@@ -2,33 +2,20 @@
 <html lang="en">
 <head>
 
-    <!-- =========================================
-         SEO — title and description are updated
-         dynamically by product-detail.js
-    ========================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Research Compound | XenaPeptides</title>
-
-    <meta
-        name="description"
-        content="Premium research-grade compound manufactured in Germany under strict quality control standards."
-    >
-
+    <meta name="description" content="Premium research-grade compound manufactured in Germany under strict quality control standards.">
     <meta name="robots" content="index, follow">
 
-    <!-- Open Graph — also updated dynamically -->
-    <meta property="og:type"        content="product">
-    <meta property="og:site_name"   content="XenaPeptides">
-    <meta property="og:title"       content="Research Compound | XenaPeptides">
+    <meta property="og:type"      content="product">
+    <meta property="og:site_name" content="XenaPeptides">
+    <meta property="og:title"     content="Research Compound | XenaPeptides">
     <meta property="og:description" content="Premium research-grade compound manufactured in Germany.">
 
     <meta name="theme-color" content="#090909">
 
-    <!-- =========================================
-         Styles
-    ========================================== -->
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/product-detail.css">
 
@@ -36,36 +23,29 @@
 
 <body>
 
-    <!-- =========================================
-         Navbar
-    ========================================== -->
     <header class="navbar">
-
         <div class="nav-container">
 
             <a href="index.html" class="nav-brand" aria-label="XenaPeptides Homepage">
-                XENA<span>PEPTIDE</span>
+                XENA<span>PEPTIDES</span>
             </a>
 
             <nav aria-label="Main Navigation">
                 <ul id="nav-links" class="nav-links">
-                    <li>
-                        <a href="index.html" class="active" aria-current="page">
 
+                    <li>
+                        <a href="index.html">
                             <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-10.5Z"/>
                             </svg>
-
                             Home
-
                         </a>
                     </li>
 
                     <li>
                         <a href="shop.html">
-
                             <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -73,73 +53,45 @@
                                 <circle cx="9" cy="20" r="1"/>
                                 <circle cx="18" cy="20" r="1"/>
                             </svg>
-
                             Shop
-
                         </a>
                     </li>
 
                     <li>
                         <a href="contact.html">
-
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round">
-
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="3" y="5" width="18" height="14" rx="2"/>
                                 <path d="M3 7l9 6 9-6"/>
                             </svg>
-
                             Contact
-
                         </a>
                     </li>
+
                 </ul>
             </nav>
 
             <div class="nav-controls">
-
                 <div class="german-badge" title="Made in Germany" aria-label="Made in Germany">
-                    🇩🇪
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3" width="28" height="17" style="display:block;border-radius:2px;">
+                        <rect fill="#000000" width="5" height="1"/>
+                        <rect fill="#DD0000" width="5" height="1" y="1"/>
+                        <rect fill="#FFCE00" width="5" height="1" y="2"/>
+                    </svg>
                 </div>
-
-                <button
-                    type="button"
-                    id="hamburger-btn"
-                    class="hamburger"
-                    aria-label="Toggle Menu"
-                    aria-expanded="false"
-                >
-                </button>
-
+                <button type="button" id="hamburger-btn" class="hamburger" aria-label="Toggle Menu" aria-expanded="false"></button>
             </div>
 
         </div>
-
         <div id="nav-overlay" class="nav-overlay" aria-hidden="true"></div>
-
     </header>
 
-    <!-- =========================================
-         Main
-    ========================================== -->
     <main class="container">
-
-        <div id="product-detail-container">
-            <!-- Injected by product-detail.js -->
-        </div>
-
+        <div id="product-detail-container"></div>
     </main>
 
-    <!-- =========================================
-         Footer
-    ========================================== -->
     <footer class="footer">
-
         <div class="footer-container">
 
             <div class="footer-brand">
@@ -150,68 +102,44 @@
             </div>
 
             <div class="footer-nav">
-
                 <h4>Contact</h4>
-
                 <ul class="footer-contact-list">
-
                     <li>
                         <span class="footer-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M3.654 1.328a.678.678 0 0 1 .737-.168l2.522 1.01c.329.132.445.517.265.806l-1.07 1.77a.678.678 0 0 0 .145.842l2.457 2.457a.678.678 0 0 0 .842.145l1.77-1.07a.678.678 0 0 1 .806.265l1.01 2.522a.678.678 0 0 1-.168.737l-1.272 1.272c-.74.74-1.846 1.065-2.877.702-2.54-.89-5.528-3.878-6.418-6.418-.363-1.03-.038-2.137.702-2.877L3.654 1.328z"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 1 .737-.168l2.522 1.01c.329.132.445.517.265.806l-1.07 1.77a.678.678 0 0 0 .145.842l2.457 2.457a.678.678 0 0 0 .842.145l1.77-1.07a.678.678 0 0 1 .806.265l1.01 2.522a.678.678 0 0 1-.168.737l-1.272 1.272c-.74.74-1.846 1.065-2.877.702-2.54-.89-5.528-3.878-6.418-6.418-.363-1.03-.038-2.137.702-2.877L3.654 1.328z"/></svg>
                         </span>
                         <a href="tel:+96170123456">+961 70 123 456</a>
                     </li>
-
                     <li>
                         <span class="footer-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-.5a1 1 0 0 0-.8.4L8 8.417 14.8 3.9a1 1 0 0 0-.8-.4H2z"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-.5a1 1 0 0 0-.8.4L8 8.417 14.8 3.9a1 1 0 0 0-.8-.4H2z"/></svg>
                         </span>
                         <a href="mailto:contact@xenapeptides.com">contact@xenapeptides.com</a>
                     </li>
-
                     <li>
                         <span class="footer-icon" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/></svg>
                         </span>
                         <a href="https://t.me/xenapeptides" target="_blank" rel="noopener noreferrer">@xenapeptides</a>
                     </li>
-
                 </ul>
-
             </div>
 
             <div class="footer-nav">
-
                 <h4>Navigation</h4>
-
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="shop.html">Shop</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
-
             </div>
 
         </div>
-
         <div class="footer-bottom">
-            <p>
-                © 2026 XENAPEPTIDES. All rights reserved.
-                For research validation use only. Not for human consumption.
-            </p>
+            <p>© 2026 XENAPEPTIDES. All rights reserved. For research validation use only. Not for human consumption.</p>
         </div>
-
     </footer>
 
-    <!-- =========================================
-         Scripts
-    ========================================== -->
     <script type="module" src="js/product-detail.js"></script>
 
 </body>

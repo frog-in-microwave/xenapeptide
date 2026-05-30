@@ -104,6 +104,7 @@ img { max-width: 100%; height: auto; display: block; }
   flex: 0 0 auto;
 }
 
+/* German flag badge — SVG, no emoji */
 .german-badge {
   display: flex;
   align-items: center;
@@ -113,8 +114,6 @@ img { max-width: 100%; height: auto; display: block; }
   border: 1px solid var(--border-color);
   background-color: rgba(212, 175, 55, 0.08);
   border-radius: 8px;
-  font-size: 1.2rem;
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 
 .hamburger {
@@ -147,7 +146,7 @@ img { max-width: 100%; height: auto; display: block; }
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 0;
   border-left: 1px solid var(--border-color);
   transform: translateX(100%);
   transition: transform var(--transition-speed) ease;
@@ -157,13 +156,24 @@ img { max-width: 100%; height: auto; display: block; }
 
 .nav-links li { width: 100%; text-align: center; }
 
-/* Single unified .nav-links a — works for both mobile drawer and desktop */
+/* Divider lines between drawer items — inset, not full width */
+@media (max-width: 767px) {
+  .nav-links li:not(:last-child)::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background: var(--border-light);
+    margin: 0 32px;
+  }
+}
+
+/* Single unified .nav-links a */
 .nav-links a {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 16px 0;
+  padding: 18px 0;
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -178,19 +188,7 @@ img { max-width: 100%; height: auto; display: block; }
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  position: relative;
 }
-
-
-
-@media (min-width: 992px) {
-  
-.nav-links a svg {
-  top: 1px;
-}
-}
-
-
 
 /* Active page indicator */
 .nav-links a.active,
@@ -228,6 +226,7 @@ img { max-width: 100%; height: auto; display: block; }
     transition: none;
   }
   .nav-links li { width: auto; }
+  .nav-links li::after { display: none !important; }
   .nav-links a {
     padding: 0;
     font-size: 0.8rem;
