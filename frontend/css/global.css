@@ -179,8 +179,18 @@ img { max-width: 100%; height: auto; display: block; }
   height: 16px;
   flex-shrink: 0;
   position: relative;
+}
+
+
+
+@media (min-width: 992px) {
+  
+.nav-links a svg {
   top: 1px;
 }
+}
+
+
 
 /* Active page indicator */
 .nav-links a.active,
