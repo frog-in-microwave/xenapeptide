@@ -3,8 +3,8 @@
    ========================================= */
 :root {
   --bg-color:      #0d0b07;
-  --surface-color: #141209;
-  --panel-bg:      #0f0d09;
+  --surface-color: #111111;
+  --panel-bg:      #0a0a0a;
   --text-primary: #ffffff;
   --text-secondary: #cbd5e1;
   --accent-primary: #D4AF37;
@@ -21,12 +21,9 @@ html { overflow-x: clip; }
 body {
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--bg-color);
-  background-image: radial-gradient(
-    ellipse 90% 40% at 50% 0%,
-    rgba(212, 175, 55, 0.07),
-    transparent 60%
-  );
-  background-attachment: fixed;
+  background-image:
+    radial-gradient(ellipse 140% 55% at 50% 0%,   rgba(212, 175, 55, 0.18), transparent 55%),
+    radial-gradient(ellipse 80%  35% at 50% 100%, rgba(212, 175, 55, 0.07), transparent 50%);
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
@@ -78,7 +75,7 @@ img { max-width: 100%; height: auto; display: block; }
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: rgba(13, 11, 7, 0.95);
+  background-color: rgba(9, 9, 9, 0.95);
   border-bottom: 1px solid var(--border-color);
   backdrop-filter: blur(10px);
 }
@@ -148,7 +145,7 @@ img { max-width: 100%; height: auto; display: block; }
   right: 0;
   width: 260px;
   height: 100vh;
-  background-color: #131007;
+  background-color: #0d0d0d;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -340,7 +337,7 @@ img { max-width: 100%; height: auto; display: block; }
    Footer
    ========================================= */
 .footer {
-  background-color: #0b0904;
+  background-color: #0b0b0b;
   border-top: 1px solid var(--border-color);
   padding: 40px 20px;
   margin-top: 60px;
