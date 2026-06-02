@@ -16,7 +16,7 @@ const router = express.Router();
 router.post("/contact", rateLimiter, async (req, res) => {
     try{
         // getting the data sent from the frontend
-        const {name, email, message, phoneNumber, honeyPot} = req.body;
+        const {name, email, message, phone, honeyPot} = req.body;
 
 
         // hidden input field. user cant see so if its filled, its a bot
@@ -43,7 +43,7 @@ router.post("/contact", rateLimiter, async (req, res) => {
 
         const formattedMessage = `Name: ${name}
             Email: ${email}
-            Phone Number: ${phoneNumber || "Not provided"}
+            Phone Number: ${phone || "Not provided"}
             Message: ${message}
         `;
 

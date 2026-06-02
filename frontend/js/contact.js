@@ -149,17 +149,20 @@ document.addEventListener("DOMContentLoaded", () => {
         message: document.getElementById("contact-message").value.trim(),
       };
 
+        console.log("payload : ", payload);
       try {
         // When backend is ready, replace with:
-        // const res = await fetch("/api/contact", {
-        //   method: "POST",
-        //   headers: { "Content-Type": "application/json" },
-        //   body: JSON.stringify(payload),
-        // });
-        // if (!res.ok) throw new Error("Server error");
+        const res = await fetch("http://localhost:5000/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error("Server error");
 
-        // Placeholder until backend is built
-        await new Promise((resolve) => setTimeout(resolve, 800));
+
+        console.log("Contact form response:", await res.json());
+
+        
 
         status.textContent = "Message sent! We will get back to you shortly.";
         status.className = "form-status success";
