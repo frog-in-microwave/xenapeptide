@@ -16,7 +16,8 @@ const router = express.Router();
 // or an error message with status 429 (too many requests) if the rate limit of 10 is exceeded
 router.get("/products", rateLimiter, async (req, res) => {
     try {
-        const productsList = await Product.find().select("name price image");
+        const productsList = await Product.find().select("id name price image");
+        // console.log("productsList : ", productsList);
         res.status(200).json(productsList);
     }
     catch (err) {
@@ -28,11 +29,11 @@ router.get("/products", rateLimiter, async (req, res) => {
 
 router.post("/product", rateLimiter, async (req, res) => {
   try {
-    const { name } = req.body;
-    if(!name) {
+    const { id } = req.body;
+    if(!id) {
         return res.status(400).json({ error: "Product name is not sent to the backend" });
     }
-    const product = await Product.findOne({ name });
+    const product = await Product.findOne({ id });
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }

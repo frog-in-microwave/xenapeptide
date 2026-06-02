@@ -1,9 +1,10 @@
 import { openModal } from "./modal.js";
 
 export async function getProducts() {
-  const response = await fetch("./fakeDatabase.json");
+  const response = await fetch("http://localhost:5000/api/products");
   if (!response.ok) throw new Error("Failed to fetch product data.");
-  return response.json();
+  const products = await response.json();
+  return products;
 }
 
 export function renderProducts(products, grid) {

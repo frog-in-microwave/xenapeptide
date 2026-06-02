@@ -5,11 +5,15 @@ import "./modal.js";
 // Fetch single product by ID
 // =========================================
 async function fetchProduct(id) {
-  const response = await fetch("./fakeDatabase.json");
+  const response = await fetch("http://localhost:5000/api/product", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id }),
+  });
   // When backend is ready, replace with: fetch(`/api/products/${id}`)
   if (!response.ok) throw new Error("Failed to fetch product.");
-  const products = await response.json();
-  return products.find((p) => p.id === id) ?? null;
+  const product = await response.json();
+  return product;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
