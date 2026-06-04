@@ -56,8 +56,10 @@ document
 
       const data = await response.json();
 
-      console.log("Add Product Response:", data);
-
+      if (!response.ok) {
+        alert(data.message || "Failed to add product.");
+        return;
+      }
       alert("Product added successfully.");
 
       e.target.reset();
@@ -79,22 +81,24 @@ document
     const name = document.getElementById("remove-name").value.trim();
 
     try {
+      console.log("Attempting to remove product:", name);
       const response = await fetch(
         "http://localhost:5000/api/admin/remove-product",
         {
-          method: "POST",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            "authorization": `Bearer ${localStorage.getItem("adminToken")}`,
           },
-          body: JSON.stringify({
-            name,
-          }),
+          body: JSON.stringify({ name }),
         },
       );
 
       const data = await response.json();
-
-      console.log("Remove Product Response:", data);
+      if (!response.ok) {
+        alert(data.message || "Failed to remove product.");
+        return;
+      }
 
       alert("Product removed successfully.");
 

@@ -68,6 +68,32 @@ router.post("/add-product", authenticateToken, rateLimiter, upload.single("image
 
 
 
+router.delete("/remove-product", authenticateToken, rateLimiter, async (req, res) => {
+    const { name } = req.body;
+    console.log("Received request to remove product:", name);
+    if(!name){
+        res.status(400).json({message : "Product name is not sent to the backend"});
+        return;
+    }
+
+    try{
+        const deletedProduct = await Product.findOneAndDelete({ name });
+        if(!deletedProduct){
+            res.status(404).json({message : "Product not found"});
+            return;
+        }
+
+        res.status(200).json({message : "Product removed successfully"});
+    }catch(err){
+        console.error("Error removing product:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+})
+
+
+
+
+
 router.put("add-product", authenticateToken, rateLimiter)
 
 
