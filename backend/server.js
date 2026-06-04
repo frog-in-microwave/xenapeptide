@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 
 import productRoutes from "./routes/productRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
-
+import authRoutes from "./routes/authRoutes.js";
 
 
 
@@ -27,6 +27,8 @@ app.use(express.json());
 
 app.use("/api", productRoutes);
 app.use("/api", contactRoutes);
+app.use("/api/admin", authRoutes);
+
 
 // setting up the mongodb database connection
 mongoose.connect(process.env.MONGO_URL).then(() => {

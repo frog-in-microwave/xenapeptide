@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import Product from "../models/productModel.js";
 import rateLimiter from "../middleware/rateLimiter.js";
 
+
 dotenv.config();
 
 const router = express.Router();
