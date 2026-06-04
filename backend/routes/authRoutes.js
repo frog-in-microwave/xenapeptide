@@ -12,7 +12,7 @@ const router = express.Router();
 
 
 // sends a jwt token made from the secret and the username and expires in 7 days if the username and pass is correct.
-router.post("/login", async (req, res) =>{
+router.post("/login", rateLimiter, async (req, res) =>{
     try{
         const {username, password} = req.body;
         if(!username || !password){

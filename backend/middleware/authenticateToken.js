@@ -13,7 +13,6 @@ const authenticateToken = (req, res, next) => {
         // getting the token from the header
         const authHeader = req.headers["authorization"];
         const token = authHeader && authHeader.split(" ")[1];
-        console.log("Received token in header:", authHeader);
 
         // if token doesnt exist, bad request (return 401)
         if(!token){

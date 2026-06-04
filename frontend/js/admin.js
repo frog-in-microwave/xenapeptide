@@ -47,6 +47,9 @@ document
         "http://localhost:5000/api/admin/add-product",
         {
           method: "POST",
+          headers: {
+            "authorization": `Bearer ${localStorage.getItem("adminToken")}`,
+          },
           body: formData,
         },
       );
