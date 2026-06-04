@@ -48,11 +48,12 @@ router.post("/add-product", authenticateToken, rateLimiter, upload.single("image
 
 
         const newProduct = Product({
-            name : req.body.name,
-            description : req.body.description,
-            price : req.body.price,
-            image : result.url, // the url of the uploaded image returned from imagekit
-        })
+          id: crypto.randomUUID(), // generating a unique id for the product using crypto module
+          name: req.body.name,
+          description: req.body.description,
+          price: req.body.price,
+          image: result.url, // the url of the uploaded image returned from imagekit
+        });
         await newProduct.save();
 
         res.status(200).json({message : "Product added successfully"});

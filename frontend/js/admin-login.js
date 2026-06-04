@@ -17,7 +17,6 @@ document
         },
         body: await JSON.stringify({ username, password }),
       });
-      console.log({ username, password });
       const data = await res.json();
 
       console.log(data);
