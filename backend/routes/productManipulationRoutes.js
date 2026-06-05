@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 
 import multer from "multer";
 import imagekit from "imagekit";
+import crypto from "crypto";
 
 
 dotenv.config();
@@ -39,35 +40,35 @@ const upload = multer({
 // so we can easily access the name, price and description of the product from req.body and the image from req.file.
 router.post("/add-product", authenticateToken, rateLimiter, upload.single("image"), async (req, res) => {
     try{
+      const productExists = await Product.findOne({ name: req.body.name });
+      if (productExists) {
+        res
+          .status(400)
+          .json({ message: "Product with the same name already exists" });
+        return;
+      }
 
-        const productExists = await Product.findOne({ name: req.body.name });
-        if (productExists) {
-            res.status(400).json({ message: "Product with the same name already exists" });
-            return;
-        }
+      const result = await imagekitObject.upload({
+        file: req.file.buffer, // image buffer
+        fileName: req.body.name, // name
+        folder: "/products",
+      });
+      // if the image upload failed, return an error
+      if (!result || !result.url) {
+        return res.status(500).json({ message: "Image upload failed" });
+      }
 
+      const newProduct = Product({
+        id: crypto.randomUUID(), // generating a unique id for the product using crypto module
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        image: result.url, // the url of the uploaded image returned from imagekit
+        fileId: result.fileId, // the fileId of the uploaded image returned from imagekit, we will use this fileId to delete the image from imagekit when we delete the product from the database
+      });
+      await newProduct.save();
 
-
-        const result = await imagekitObject.upload({
-            file: req.file.buffer, // image buffer
-            fileName: req.body.name, // name 
-            folder: "/products",
-        });
-
-
-
-        const newProduct = Product({
-          id: crypto.randomUUID(), // generating a unique id for the product using crypto module
-          name: req.body.name,
-          description: req.body.description,
-          price: req.body.price,
-          image: result.url, // the url of the uploaded image returned from imagekit
-          fileId: result.fileId, // the fileId of the uploaded image returned from imagekit, we will use this fileId to delete the image from imagekit when we delete the product from the database
-        });
-        await newProduct.save();
-
-        res.status(200).json({message : "Product added successfully"});
-
+      res.status(200).json({ message: "Product added successfully" });
     }catch(err){
         console.error("Error uploading image:", err);
         res.status(500).json({ error: "Internal Server Error" });
@@ -112,7 +113,7 @@ router.put("/edit-product", authenticateToken, rateLimiter, upload.single("newIm
     try {
       const { productName, newName, newDescription, newPrice } = req.body;
 
-      if (!productName && !newName && !newDescription && !newPrice) {
+      if (!productName || !newName && !newDescription && !newPrice && !req.file) {
         res
           .status(400)
           .json({ message: "Please fill at least one of the fields" });
@@ -131,6 +132,10 @@ router.put("/edit-product", authenticateToken, rateLimiter, upload.single("newIm
           fileName: req.body.newName || productName, // name
           folder: "/products",
         });
+        // if the image upload failed, return an error
+        if (!result || !result.url) {
+          return res.status(500).json({ message: "Image upload failed" });
+        }
 
         // deleting the image from imagekit using the fileId stored in the database
         await imagekitObject.deleteFile(product.fileId);
@@ -147,10 +152,9 @@ router.put("/edit-product", authenticateToken, rateLimiter, upload.single("newIm
 
       await Product.findOneAndUpdate({ name: productName }, newProduct);
 
+      
 
-      res
-        .status(200)
-        .json({ message: "Product edited successfully", product: newProduct });
+      res.status(200).json({ message: "Product edited successfully", product: newProduct });
     }catch(err){
         console.error("Error editing product:", err);
         res.status(500).json({ error: "Internal Server Error" });

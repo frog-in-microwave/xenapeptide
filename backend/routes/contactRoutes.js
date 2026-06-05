@@ -12,6 +12,21 @@ dotenv.config();
 const router = express.Router();
 
 
+
+// creating the nodemailer transporter
+const transporter = nodemailer.createTransport({
+    service: "gmail", // using gmail as the email service. in case of using another service, the configuration will be different. check nodemailer documentation for more details
+
+    // email and app password for the sending email account. these should be stored in the .env file for obvious security reasons
+    auth: {
+        user: process.env.EMAIL_ADRESS,
+        pass: process.env.EMAIL_PASSWORD,
+    },
+});
+
+
+
+
 // this endpoint sends the message from the contact section to the email specified in the .env file
 router.post("/contact", rateLimiter, async (req, res) => {
     try{
@@ -47,16 +62,7 @@ router.post("/contact", rateLimiter, async (req, res) => {
             Message: ${message}
         `;
 
-        // creating the nodemailer transporter
-        const transporter = nodemailer.createTransport({
-        service: "gmail", // using gmail as the email service. in case of using another service, the configuration will be different. check nodemailer documentation for more details
         
-        // email and app password for the sending email account. these should be stored in the .env file for obvious security reasons
-        auth: {
-            user: process.env.EMAIL_ADRESS,
-            pass: process.env.EMAIL_PASSWORD,
-        },
-        });
 
         // this is basicaly the email object that will be sent. it contains the sender, the receiver, the subject and the message. 
         // the replyTo field is set to the email of the user who sent the message, so when we reply to the email, it will be sent to the user email instead of the sending email
