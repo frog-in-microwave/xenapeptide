@@ -39,6 +39,15 @@ const upload = multer({
 // so we can easily access the name, price and description of the product from req.body and the image from req.file.
 router.post("/add-product", authenticateToken, rateLimiter, upload.single("image"), async (req, res) => {
     try{
+
+        const productExists = await Product.findOne({ name: req.body.name });
+        if (productExists) {
+            res.status(400).json({ message: "Product with the same name already exists" });
+            return;
+        }
+
+
+
         const result = await imagekitObject.upload({
             file: req.file.buffer, // image buffer
             fileName: req.body.name, // name 
@@ -53,6 +62,7 @@ router.post("/add-product", authenticateToken, rateLimiter, upload.single("image
           description: req.body.description,
           price: req.body.price,
           image: result.url, // the url of the uploaded image returned from imagekit
+          fileId: result.fileId, // the fileId of the uploaded image returned from imagekit, we will use this fileId to delete the image from imagekit when we delete the product from the database
         });
         await newProduct.save();
 
@@ -70,7 +80,6 @@ router.post("/add-product", authenticateToken, rateLimiter, upload.single("image
 
 router.delete("/remove-product", authenticateToken, rateLimiter, async (req, res) => {
     const { name } = req.body;
-    console.log("Received request to remove product:", name);
     if(!name){
         res.status(400).json({message : "Product name is not sent to the backend"});
         return;
@@ -82,6 +91,9 @@ router.delete("/remove-product", authenticateToken, rateLimiter, async (req, res
             res.status(404).json({message : "Product not found"});
             return;
         }
+
+        // deleting the image from imagekit using the fileId stored in the database
+        await imagekitObject.deleteFile(deletedProduct.fileId);
 
         res.status(200).json({message : "Product removed successfully"});
     }catch(err){
@@ -98,46 +110,47 @@ router.delete("/remove-product", authenticateToken, rateLimiter, async (req, res
 
 router.put("/edit-product", authenticateToken, rateLimiter, upload.single("newImage"), async (req, res) => {
     try {
-        const { productName, newName, newDescription, newPrice} = req.body;
+      const { productName, newName, newDescription, newPrice } = req.body;
 
-        if(!productName && !newName && !newDescription && !newPrice){
-            res.status(400).json({message : "Please fill at least one of the fields"});
-            return;
-        }
+      if (!productName && !newName && !newDescription && !newPrice) {
+        res
+          .status(400)
+          .json({ message: "Please fill at least one of the fields" });
+        return;
+      }
 
-        const product = await Product.findOne({ name: productName });
-        if (!product) {
-            res.status(404).json({ message: "Product not found" });
-            return;
-        }
-        let result = {};
-        if(req.file){
-            
-            result = await imagekitObject.upload({
-              file: req.file.buffer, // image buffer
-              fileName: req.body.newName || productName, // name
-              folder: "/products",
-            });
-        }
+      const product = await Product.findOne({ name: productName });
+      if (!product) {
+        res.status(404).json({ message: "Product not found" });
+        return;
+      }
+      let result = {};
+      if (req.file) {
+        result = await imagekitObject.upload({
+          file: req.file.buffer, // image buffer
+          fileName: req.body.newName || productName, // name
+          folder: "/products",
+        });
+
+        // deleting the image from imagekit using the fileId stored in the database
+        await imagekitObject.deleteFile(product.fileId);
+      }
+
+      const newProduct = {
+        id: product.id,
+        name: newName || product.name,
+        description: newDescription || product.description,
+        price: newPrice || product.price,
+        image: result.url || product.image, // the url of the uploaded image returned from imagekit
+        fileId: result.fileId || product.fileId, // the fileId of the uploaded image returned from imagekit
+      };
+
+      await Product.findOneAndUpdate({ name: productName }, newProduct);
 
 
-
-
-        const newProduct = {
-            id: product.id,
-            name: newName || product.name,
-            description: newDescription || product.description,
-            price: newPrice || product.price,
-            image: result.url || product.image, // the url of the uploaded image returned from imagekit 
-        }
-
-        await Product.findOneAndUpdate({ name: productName }, newProduct);
-
-
-
-
-        res.status(200).json({message : "Product edited successfully", product : newProduct});
-
+      res
+        .status(200)
+        .json({ message: "Product edited successfully", product: newProduct });
     }catch(err){
         console.error("Error editing product:", err);
         res.status(500).json({ error: "Internal Server Error" });

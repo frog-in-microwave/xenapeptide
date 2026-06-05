@@ -6,6 +6,7 @@ const productSchema = new mongoose.Schema({
     description: { type: String, required: true },
     price: { type: String, required: true },
     image: { type: String, required: true },
+    fileId: { type: String, required: true }, // to store the fileId returned by imagekit for later deletion
 });
 
 
