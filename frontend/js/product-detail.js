@@ -1,11 +1,15 @@
 import { openModal } from "./modal.js";
 import "./modal.js";
 
+import { API_URL } from "./config.js";
+
+
+
 // =========================================
 // Fetch single product by ID
 // =========================================
 async function fetchProduct(id) {
-  const response = await fetch("http://localhost:5000/api/product", {
+  const response = await fetch(`${API_URL}/product`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id }),

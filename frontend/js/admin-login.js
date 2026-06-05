@@ -1,12 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => {
-  /* =========================================
-     DRAWER LOGIC (MOBILE NAV)
-     ========================================= */
+import { API_URL } from "./config.js";
 
+document.addEventListener("DOMContentLoaded", async () => {
+  // =========================================
+  // 1. Mobile Drawer
+  // =========================================
   const hamburger = document.getElementById("hamburger-btn");
   const navLinks = document.getElementById("nav-links");
-  const navOverlay = document.getElementById("nav-overlay");
-  const navItems = document.querySelectorAll("#nav-links a");
+  const overlay = document.getElementById("nav-overlay");
 
   const ICON_OPEN = `
     <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -18,93 +18,64 @@ document.addEventListener("DOMContentLoaded", () => {
   const ICON_CLOSE = `
     <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
       <line x1="18" y1="6" x2="6" y2="18"></line>
-      <line x1="6" y1="6" x2="18" y2="18"></line>
+      <line x1="6"  y1="6" x2="18" y2="18"></line>
     </svg>`;
 
   function openDrawer() {
-    navLinks?.classList.add("active");
-    navOverlay?.classList.add("active");
-    if (hamburger) {
-      hamburger.innerHTML = ICON_CLOSE;
-      hamburger.setAttribute("aria-expanded", "true");
-    }
-    document.body.style.overflow = "hidden";
+    navLinks.classList.add("active");
+    overlay.classList.add("active");
+    hamburger.innerHTML = ICON_CLOSE;
+    hamburger.setAttribute("aria-expanded", "true");
   }
-
   function closeDrawer() {
-    navLinks?.classList.remove("active");
-    navOverlay?.classList.remove("active");
-    if (hamburger) {
-      hamburger.innerHTML = ICON_OPEN;
-      hamburger.setAttribute("aria-expanded", "false");
-    }
-    document.body.style.overflow = "";
-  }
-
-  if (hamburger && navLinks && navOverlay) {
+    navLinks.classList.remove("active");
+    overlay.classList.remove("active");
     hamburger.innerHTML = ICON_OPEN;
-
-    hamburger.addEventListener("click", () => {
-      navLinks.classList.contains("active") ? closeDrawer() : openDrawer();
-    });
-
-    navOverlay.addEventListener("click", closeDrawer);
-
-    navItems.forEach((item) => item.addEventListener("click", closeDrawer));
+    hamburger.setAttribute("aria-expanded", "false");
   }
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeDrawer();
-  });
+  if (hamburger && navLinks && overlay) {
+    hamburger.innerHTML = ICON_OPEN;
+    hamburger.addEventListener("click", () =>
+      navLinks.classList.contains("active") ? closeDrawer() : openDrawer(),
+    );
+    overlay.addEventListener("click", closeDrawer);
+    navLinks
+      .querySelectorAll("a")
+      .forEach((link) => link.addEventListener("click", closeDrawer));
+  }
+});
 
-  /* =========================================
-     LOGIN FORM
-     ========================================= */
+document.getElementById("login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  const form = document.getElementById("login-form");
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
   const errorMsg = document.getElementById("error-msg");
 
-  if (!form) return;
+  errorMsg.textContent = "";
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  try {
+    const res = await fetch(`${API_URL}/admin/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: await JSON.stringify({ username, password }),
+    });
+    const data = await res.json();
 
-    const username = document.getElementById("username")?.value.trim();
-    const password = document.getElementById("password")?.value.trim();
-
-    if (!username || !password) {
-      if (errorMsg) errorMsg.textContent = "Please fill all fields";
+    console.log(data);
+    if (!res.ok) {
+      errorMsg.textContent = data.message || "Login failed";
       return;
     }
 
-    if (errorMsg) errorMsg.textContent = "";
+    localStorage.setItem("adminToken", data.token);
 
-    try {
-      const res = await fetch("http://localhost:5000/api/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await res.json();
-
-      console.log("Login response:", data);
-
-      if (!res.ok) {
-        if (errorMsg) {
-          errorMsg.textContent = data.message || "Login failed";
-        }
-        return;
-      }
-
-      localStorage.setItem("adminToken", data.token);
-
-      window.location.href = "admin.html";
-    } catch (err) {
-      console.error("Login error:", err);
-      if (errorMsg) errorMsg.textContent = "Server error";
-    }
-  });
+    window.location.href = "admin.html";
+  } catch (err) {
+    console.error(err);
+    errorMsg.textContent = "Server error";
+  }
 });

@@ -48,13 +48,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // =========================================
-  // 2. Load Products (first 4 only)
+  // 2. Load Products (first 6 only)
   // =========================================
   const grid = document.getElementById("product-grid");
   if (grid) {
     try {
       const products = await getProducts();
-      renderProducts(products.slice(0, 4), grid);
+      renderProducts(products.slice(0, 6), grid);
     } catch (error) {
       console.error("Error loading products:", error);
       grid.innerHTML = `
@@ -64,15 +64,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // =========================================
-  // 3. Contact Form
-  // =========================================
-  const contactForm = document.getElementById("contact-form");
-  if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      alert("Thank you! Your message has been sent.");
-      contactForm.reset();
-    });
-  }
+  
 });
