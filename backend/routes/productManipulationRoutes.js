@@ -94,7 +94,57 @@ router.delete("/remove-product", authenticateToken, rateLimiter, async (req, res
 
 
 
-router.put("add-product", authenticateToken, rateLimiter)
+
+
+router.put("/edit-product", authenticateToken, rateLimiter, upload.single("newImage"), async (req, res) => {
+    try {
+        const { productName, newName, newDescription, newPrice} = req.body;
+
+        if(!productName && !newName && !newDescription && !newPrice){
+            res.status(400).json({message : "Please fill at least one of the fields"});
+            return;
+        }
+
+        const product = await Product.findOne({ name: productName });
+        if (!product) {
+            res.status(404).json({ message: "Product not found" });
+            return;
+        }
+        let result = {};
+        if(req.file){
+            
+            result = await imagekitObject.upload({
+              file: req.file.buffer, // image buffer
+              fileName: req.body.newName || productName, // name
+              folder: "/products",
+            });
+        }
+
+
+
+
+        const newProduct = {
+            id: product.id,
+            name: newName || product.name,
+            description: newDescription || product.description,
+            price: newPrice || product.price,
+            image: result.url || product.image, // the url of the uploaded image returned from imagekit 
+        }
+
+        await Product.findOneAndUpdate({ name: productName }, newProduct);
+
+
+
+
+        res.status(200).json({message : "Product edited successfully", product : newProduct});
+
+    }catch(err){
+        console.error("Error editing product:", err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+})
+
+
 
 
 

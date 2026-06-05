@@ -150,7 +150,10 @@ document
       const response = await fetch(
         "http://localhost:5000/api/admin/edit-product",
         {
-          method: "POST",
+          method: "PUT",
+          headers: {
+            "authorization": `Bearer ${localStorage.getItem("adminToken")}`,
+          },
           body: formData,
         },
       );
@@ -158,10 +161,13 @@ document
       const data = await response.json();
 
       console.log("Edit Product Response:", data);
-
+      if (!response.ok) {
+        alert(data.message || "Failed to update product.");
+        return;
+      }
       alert("Product updated successfully.");
 
-      e.target.reset();
+      // e.target.reset();
     } catch (error) {
       console.error(error);
       alert("Failed to update product.");
