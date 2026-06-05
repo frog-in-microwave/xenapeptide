@@ -1,12 +1,13 @@
-import {API_URL}  from "./config.js";
+import { API_URL } from "./config.js";
 
 const actionButtons = document.querySelectorAll(".admin-action-btn");
 const panels = document.querySelectorAll(".admin-panel");
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // =========================================
-  // 1. Mobile Drawer
-  // =========================================
+  /* =========================================
+     1. Mobile Drawer
+     ========================================= */
+
   const hamburger = document.getElementById("hamburger-btn");
   const navLinks = document.getElementById("nav-links");
   const overlay = document.getElementById("nav-overlay");
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const ICON_CLOSE = `
     <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
       <line x1="18" y1="6" x2="6" y2="18"></line>
-      <line x1="6"  y1="6" x2="18" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
     </svg>`;
 
   function openDrawer() {
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     hamburger.innerHTML = ICON_CLOSE;
     hamburger.setAttribute("aria-expanded", "true");
   }
+
   function closeDrawer() {
     navLinks.classList.remove("active");
     overlay.classList.remove("active");
@@ -65,7 +67,7 @@ actionButtons.forEach((button) => {
 });
 
 /* =========================================
-   Add Product
+   ADD PRODUCT
    ========================================= */
 
 document
@@ -73,34 +75,29 @@ document
   ?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const btn = e.target.querySelector("button[type='submit']");
+    btn.classList.add("loading");
+
     const imageFile = document.getElementById("add-image").files[0];
 
     const formData = new FormData();
-
     formData.append("name", document.getElementById("add-name").value.trim());
-
     formData.append(
       "description",
       document.getElementById("add-description").value.trim(),
     );
-
     formData.append("price", document.getElementById("add-price").value.trim());
 
-    if (imageFile) {
-      formData.append("image", imageFile);
-    }
+    if (imageFile) formData.append("image", imageFile);
 
     try {
-      const response = await fetch(
-        `${API_URL}/admin/add-product`,
-        {
-          method: "POST",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-          },
-          body: formData,
+      const response = await fetch(`${API_URL}/admin/add-product`, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
-      );
+        body: formData,
+      });
 
       const data = await response.json();
 
@@ -108,17 +105,19 @@ document
         alert(data.message || "Failed to add product.");
         return;
       }
-      alert("Product added successfully.");
 
+      alert("Product added successfully.");
       e.target.reset();
     } catch (error) {
       console.error(error);
       alert("Failed to add product.");
+    } finally {
+      btn.classList.remove("loading");
     }
   });
 
 /* =========================================
-   Remove Product
+   REMOVE PRODUCT
    ========================================= */
 
 document
@@ -126,45 +125,49 @@ document
   ?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const btn = e.target.querySelector("button[type='submit']");
+    btn.classList.add("loading");
+
     const name = document.getElementById("remove-name").value.trim();
 
     try {
-      console.log("Attempting to remove product:", name);
-      const response = await fetch(
-        `${API_URL}/admin/remove-product`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-          },
-          body: JSON.stringify({ name }),
+      const response = await fetch(`${API_URL}/admin/remove-product`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
-      );
+        body: JSON.stringify({ name }),
+      });
 
       const data = await response.json();
+
       if (!response.ok) {
         alert(data.message || "Failed to remove product.");
         return;
       }
 
       alert("Product removed successfully.");
-
       e.target.reset();
     } catch (error) {
       console.error(error);
       alert("Failed to remove product.");
+    } finally {
+      btn.classList.remove("loading");
     }
   });
 
 /* =========================================
-   Edit Product
+   EDIT PRODUCT
    ========================================= */
 
 document
   .getElementById("edit-product-form")
   ?.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    const btn = e.target.querySelector("button[type='submit']");
+    btn.classList.add("loading");
 
     const imageFile = document.getElementById("edit-image").files[0];
 
@@ -195,26 +198,23 @@ document
     }
 
     try {
-      const response = await fetch(
-        `${API_URL}/admin/edit-product`,
-        {
-          method: "PUT",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-          },
-          body: formData,
+      const response = await fetch(`${API_URL}/admin/edit-product`, {
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("adminToken")}`,
         },
-      );
+        body: formData,
+      });
 
       const data = await response.json();
 
       console.log("Edit Product Response:", data);
 
       alert("Product updated successfully.");
-
-      // e.target.reset();
     } catch (error) {
       console.error(error);
       alert("Failed to update product.");
+    } finally {
+      btn.classList.remove("loading");
     }
   });
