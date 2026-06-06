@@ -1,9 +1,6 @@
 import { openModal } from "./modal.js";
 import { API_URL } from "./config.js";
 
-
-
-
 export async function getProducts() {
   const response = await fetch(`${API_URL}/products`);
   if (!response.ok) throw new Error("Failed to fetch product data.");
@@ -18,12 +15,13 @@ export function renderProducts(products, grid) {
     card.className = "product-card";
     card.style.cursor = "pointer";
     card.innerHTML = `
-      <div class="product-image-wrapper">
+      <div class="product-image-wrapper skeleton">
         <img
           src="${item.image}"
           alt="${item.name} Research Peptide"
           class="product-image"
           loading="lazy"
+          onload="this.classList.add('loaded'); this.parentElement.classList.remove('skeleton');"
         >
       </div>
       <h3 class="product-name">${item.name}</h3>
