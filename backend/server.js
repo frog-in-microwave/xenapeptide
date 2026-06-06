@@ -15,8 +15,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
-
+app.use((req, res, next) => {
+  console.log("Origin:", req.headers.origin);
+  console.log("URL:", req.originalUrl);
+  next();
+});
 // setting up cors and json parsing middleware
 app.use(cors({origin: process.env.FRONTEND_URL})); // allowing only the frontend url to access the backend for security reasons"}));
 app.use(express.json({ limit: "1mb" })); // limmit for the request body to 1mb to prevent DoS attacks. since we are only sending small data (product name, price, description and image) we dont need a bigger limit. also, the image is sent as a buffer and not as a base64 string, so it takes less space in the request body.
