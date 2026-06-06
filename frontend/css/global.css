@@ -512,3 +512,39 @@ img { max-width: 100%; height: auto; display: block; }
   from { transform: scale(0.95); opacity: 0; }
   to   { transform: scale(1);    opacity: 1; }
 }
+
+
+/* =========================================
+   Inline Loader
+   ========================================= */
+
+.inline-loader-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    grid-column: 1 / -1;
+
+    padding: 40px 20px;
+
+    color: var(--text-secondary);
+}
+
+.inline-loader {
+    width: 20px;
+    height: 20px;
+
+    border: 2px solid rgba(255,255,255,0.2);
+    border-top-color: var(--accent-primary);
+
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

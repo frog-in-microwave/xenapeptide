@@ -51,12 +51,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 2. Load Products (first 6 only)
   // =========================================
   const grid = document.getElementById("product-grid");
+
   if (grid) {
     try {
       const products = await getProducts();
+
+      grid.innerHTML = "";
+
       renderProducts(products.slice(0, 6), grid);
     } catch (error) {
       console.error("Error loading products:", error);
+
       grid.innerHTML = `
         <p style="color:#cbd5e1; text-align:center; grid-column:1/-1; padding:20px;">
           Unable to load compound profiles.
@@ -64,5 +69,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  
+
 });
