@@ -28,7 +28,7 @@ modal.innerHTML = `
     <h3 class="modal-title" id="modal-title">Contact Us To Order</h3>
     <p class="modal-subtitle">Reach out through any of the channels below and we will get back to you promptly.</p>
     <div class="modal-contacts">
-      <a href="tel:${CONTACT.phone.replace(/\s/g, "")}" class="modal-contact-item">
+      <a href="https://wa.me/${CONTACT.phone.replace(/\s/g, "")}" class="modal-contact-item">
         <span class="modal-contact-icon" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
             <path d="M3.654 1.328a.678.678 0 0 1 .737-.168l2.522 1.01c.329.132.445.517.265.806l-1.07 1.77a.678.678 0 0 0 .145.842l2.457 2.457a.678.678 0 0 0 .842.145l1.77-1.07a.678.678 0 0 1 .806.265l1.01 2.522a.678.678 0 0 1-.168.737l-1.272 1.272c-.74.74-1.846 1.065-2.877.702-2.54-.89-5.528-3.878-6.418-6.418-.363-1.03-.038-2.137.702-2.877L3.654 1.328z"/>

@@ -209,7 +209,10 @@ document
       const data = await response.json();
 
       console.log("Edit Product Response:", data);
-
+      if (!response.ok) {
+        alert(data.message || "Failed to update product.");
+        return;
+      }
       alert("Product updated successfully.");
     } catch (error) {
       console.error(error);
