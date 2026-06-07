@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin.html
+Disallow: /admin-login.html
+Disallow: /productDetail.html
+Disallow: /404.html
+
+Allow: /
+
+Sitemap: https://xenapeptide.com/sitemap.xml
