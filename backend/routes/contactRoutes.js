@@ -34,6 +34,28 @@ router.post("/contact", rateLimiter, async (req, res) => {
         const {name, email, message, phone, honeyPot} = req.body;
 
 
+        transporter.verify((error, success) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("SMTP Ready");
+          }
+        });
+        console.log(process.env.EMAIL_ADRESS);
+        console.log(
+          process.env.EMAIL_PASSWORD ? "password exists" : "missing password",
+        );
+
+
+
+
+
+
+
+
+
+
+
         // hidden input field. user cant see so if its filled, its a bot
         if(honeyPot){
             res.status(400).json({message : "Bot detected"});
