@@ -2,9 +2,9 @@
 // Contact Info — update these values only
 // =========================================
 const CONTACT = {
-  phone: "+961 70 123 456",
-  telegram: "@xenapeptides",
-  email: "contact@xenapeptides.com",
+  phone: "+49 152 16767415",
+  telegram: "@xenapeptide",
+  email: "xenapeptide@gmail.com",
 };
 
 // =========================================
