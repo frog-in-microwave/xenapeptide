@@ -15,15 +15,15 @@ const router = express.Router();
 
 // creating the nodemailer transporter
 const transporter = nodemailer.createTransport({
-    service: "gmail", // using gmail as the email service. in case of using another service, the configuration will be different. check nodemailer documentation for more details
-
-    // email and app password for the sending email account. these should be stored in the .env file for obvious security reasons
-    auth: {
-        user: process.env.EMAIL_ADRESS,
-        pass: process.env.EMAIL_PASSWORD,
-    },
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  family: 4, // force IPv4
+  auth: {
+    user: process.env.EMAIL_ADRESS,
+    pass: process.env.EMAIL_PASSWORD,
+  },
 });
-
 
 
 
