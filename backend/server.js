@@ -7,7 +7,7 @@ import productRoutes from "./routes/productRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import productManipulationRoutes from "./routes/productManipulationRoutes.js";
-
+import healthRoutes from "./routes/healthRoutes.js";
 
 dotenv.config();
 
@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: true, limit: "1mb" })); // to handle form
 // setting the productRoutes
 
 app.use("/api", productRoutes);
+app.use("/api", healthRoutes);
 app.use("/api", contactRoutes);
 app.use("/api/admin", authRoutes);
 app.use("/api/admin", productManipulationRoutes);
